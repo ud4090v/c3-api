@@ -32,7 +32,11 @@ export function createApp(): express.Express {
     });
   });
 
-  // Authenticated proxy for all other /api/* paths
+  
+import { debugRouter } from './__debug.js';
+app.use("/api", debugRouter);
+
+// Authenticated proxy for all other /api/* paths
   app.use('/api', tenantAuthMiddleware);
   app.use('/api', (req: Request, res: Response, next) => {
     const tenant = req.tenant;
