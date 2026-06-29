@@ -9,3 +9,12 @@ coverage/
 # Vercel builds via esbuild emit compiled .js next to .ts shims in api/.
 # Don't commit the compiled output; only the source .ts files are tracked.
 api/*.js
+
+# npm artifacts
+package-lock.json
+npm-debug.log*
+.npm/
+
+# pnpm artifacts (no longer used)
+.pnpm-store/
+pnpm-lock.yaml

@@ -12,7 +12,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@c3/shared": "workspace:*",
+    "@c3/shared": "file:./packages/shared",
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "pino": "^9.0.0",
