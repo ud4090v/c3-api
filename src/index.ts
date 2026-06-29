@@ -13,6 +13,7 @@ import { TENANTS } from './tenants.js';
 import { tenantAuthMiddleware } from './middleware/auth.js';
 import { requestLogger } from './middleware/logging.js';
 import { buildProxyRouter } from './routes/proxy.js';
+import { debugRouter } from './__debug.js';
 
 export function createApp(): express.Express {
   const app = express();
@@ -33,10 +34,10 @@ export function createApp(): express.Express {
   });
 
   
-import { debugRouter } from './__debug.js';
-app.use("/api", debugRouter);
-
 // Authenticated proxy for all other /api/* paths
+  // Unauthenticated debug introspection (temporary, will be removed)
+  app.use('/api', debugRouter);
+
   app.use('/api', tenantAuthMiddleware);
   app.use('/api', (req: Request, res: Response, next) => {
     const tenant = req.tenant;
