@@ -20,6 +20,13 @@ export function createApp(): express.Express {
   app.use(express.json({ limit: '1mb' }));
   app.use(requestLogger);
 
+
+  // DEBUG: log all incoming requests to diagnose rewrite routing
+  app.use((req, _res, next) => {
+    console.log(`[c3-api-IN] ${req.method} ${req.path} host=${req.headers.host} ua=${(req.headers['user-agent']||'').substring(0,40)}`);
+    next();
+  });
+
   // /api/health is the liveness probe — no auth, no upstream call
   app.get('/api/health', (_req: Request, res: Response) => {
     res.json({
